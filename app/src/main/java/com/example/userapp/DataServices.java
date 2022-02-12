@@ -1,4 +1,4 @@
-package com.example.hw02;
+package com.example.userapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -1014,6 +1014,11 @@ public class DataServices {
     public static class User implements Serializable {
         String name,gender,group,state,state_abv;
         int age;
+
+        @Override
+        public String toString() {
+            return state;
+        }
 
         public User(String name, int age, String gender, String group, String state, String state_abv) {
             this.name = name;
