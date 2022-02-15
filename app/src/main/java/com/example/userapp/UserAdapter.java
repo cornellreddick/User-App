@@ -34,6 +34,7 @@ public class UserAdapter extends ArrayAdapter<DataServices.User> {
         TextView userRelationshipTexView = convertView.findViewById(R.id.userRelationshipTexView);
 
 
+
         userNameTextView.setText(user.name);
         userStateTextView.setText(user.state);
         userAgeTextView.setText(String.valueOf(user.age));
