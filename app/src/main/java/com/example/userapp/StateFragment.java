@@ -62,7 +62,7 @@ public class StateFragment extends Fragment {
                 UserFragment userFragment = new UserFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("stateSelected", stateSelected);
-               // findUsingEnhancedForLoop(stateSelected, users);
+      //          findUsingEnhancedForLoop(stateSelected, users);
 
                 userFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getParentFragmentManager();
@@ -88,7 +88,7 @@ public class StateFragment extends Fragment {
             String state, ArrayList<DataServices.User> users) {
 
         for (DataServices.User user : users) {
-            if (user.state.equals(state)) {
+            if (!user.state.equals(state)) {
                 return user;
             }
         }

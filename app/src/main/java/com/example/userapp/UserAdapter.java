@@ -45,8 +45,6 @@ public class UserAdapter extends ArrayAdapter<DataServices.User> {
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
 
 
-
-
         viewHolder.userNameTextView.setText(user.name);
         viewHolder.userStateTextView.setText(user.state);
         viewHolder.userAgeTextView.setText(String.valueOf(user.age));
@@ -61,6 +59,7 @@ public class UserAdapter extends ArrayAdapter<DataServices.User> {
         }else{
             image.setImageResource(R.drawable.avatar_female);
         }
+
 
 
         return convertView;

@@ -26,6 +26,7 @@ public class UserFragment extends Fragment {
     UserAdapter userAdapter;
     String selectedStated;
     ArrayList<DataServices.User> users = DataServices.getAllUsers();
+    ArrayList<DataServices.User> userslist = new ArrayList<>();
     int order = -1;
 
 
@@ -46,10 +47,6 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentUserBinding.inflate(inflater, container, false);
-
-
-
-
              Bundle bundle = getArguments();
         if (bundle != null){
            selectedStated = bundle.getString("stateSelected");
@@ -59,18 +56,25 @@ public class UserFragment extends Fragment {
             }
         }
 
+        for (DataServices.User user: userslist) {
+            if (!user.state.contains(selectedStated)){
+                users.remove(user);
+
+            }
+        }
+
         listView = binding.listViewUser;
         userAdapter = new UserAdapter(getActivity(),R.layout.user_data_layout, users);
         listView.setAdapter(userAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                DataServices.User user = userAdapter.getItem(position);
 
-              DataServices.User user = userAdapter.getItem(position);
                 order = order * (-1);
                 Collections.sort(users, new Comparator<DataServices.User>(){
                     public int compare(DataServices.User obj1, DataServices.User obj2) {
-                        return order * obj1.name.compareTo(obj2.name); // To compare string values
+                            return order * obj1.state.compareTo(obj2.state); // To compare string values
                     }
                 });
 
@@ -89,13 +93,23 @@ public class UserFragment extends Fragment {
 
             }
         });
+        binding.userSortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.containerView, new SortFragment())
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
 
         return binding.getRoot();
     }
 
     public  ArrayList<DataServices.User> getFilterByState(ArrayList<DataServices.User> users, String s){
         for (int i = 0; i < users.size() ; i++) {
-            if (!users.get(i).state.contains(s.toLowerCase()) || !users.get(i).state.contains(s.toUpperCase())){
+            if (!users.get(i).state.contains(s.toLowerCase(Locale.ROOT)) || !users.get(i).state.contains(s.toUpperCase(Locale.ROOT))){
                 users.remove(users.get(i));
             }
         }

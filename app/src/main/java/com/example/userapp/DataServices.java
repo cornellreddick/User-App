@@ -1006,7 +1006,6 @@ public class DataServices {
         add(new User("Weber MacAllen",32,"Male","Friend","Texas","TX"));
         add(new User("Efren Sare",34,"Male","Friend","Massachusetts","MA"));
     }};
-
     public static ArrayList<User> getAllUsers(){
         return new ArrayList<>(users);
     }
